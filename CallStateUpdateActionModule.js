@@ -1,9 +1,7 @@
 var CallStateUpdateActionModule = {
-
-  callStateUpdated(state, incomingNumber) {
-    this.callback && this.callback(state, incomingNumber)
-  }
-
-}
+  callStateUpdated(state) {
+    this.callback && this.callback(state);
+  },
+};
 
 module.exports = CallStateUpdateActionModule;
