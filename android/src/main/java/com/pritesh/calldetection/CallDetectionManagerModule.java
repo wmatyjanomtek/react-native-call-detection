@@ -111,16 +111,16 @@ public class CallDetectionManagerModule
     }
 
     @Override
-    public void phoneCallStateUpdated(int state, String phoneNumber) {
+    public void phoneCallStateUpdated(int state) {
         jsModule = this.reactContext.getJSModule(CallStateUpdateActionModule.class);
 
         switch (state) {
             //Hangup
             case TelephonyManager.CALL_STATE_IDLE:
                 if(wasAppInOffHook == true) { // if there was an ongoing call and the call state switches to idle, the call must have gotten disconnected
-                    jsModule.callStateUpdated("Disconnected", phoneNumber);
+                    jsModule.callStateUpdated("Disconnected");
                 } else if(wasAppInRinging == true) { // if the phone was ringing but there was no actual ongoing call, it must have gotten missed
-                    jsModule.callStateUpdated("Missed", phoneNumber);
+                    jsModule.callStateUpdated("Missed");
                 }
 
                 //reset device state
@@ -131,13 +131,13 @@ public class CallDetectionManagerModule
             case TelephonyManager.CALL_STATE_OFFHOOK:
                 //Device call state: Off-hook. At least one call exists that is dialing, active, or on hold, and no calls are ringing or waiting.
                 wasAppInOffHook = true;
-                jsModule.callStateUpdated("Offhook", phoneNumber);
+                jsModule.callStateUpdated("Offhook");
                 break;
             //Incoming
             case TelephonyManager.CALL_STATE_RINGING:
                 // Device call state: Ringing. A new call arrived and is ringing or waiting. In the latter case, another call is already active.
                 wasAppInRinging = true;
-                jsModule.callStateUpdated("Incoming", phoneNumber);
+                jsModule.callStateUpdated("Incoming");
                 break;
         }
     }

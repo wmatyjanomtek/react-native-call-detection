@@ -3,15 +3,8 @@ declare module 'react-native-call-detection' {
 
   export type CallDetectorManagerCallback = (event: Event, phoneNumber: string) => void;
 
-  export type PermissionDeniedCallback = () => void;
-
-  export interface PermissionMessage {
-    title: string;
-    message: string;
-  }
-
   export default class CallDetectorManager {
-    constructor(callback: CallDetectorManagerCallback, readPhoneNumberAndroid?: boolean, permissionDeniedCallback?: PermissionDeniedCallback, permissionMessage?: PermissionMessage);
+    constructor(callback: CallDetectorManagerCallback);
 
     dispose: () => void;
   }
